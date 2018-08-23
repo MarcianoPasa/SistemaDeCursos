@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Início";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="btn-group mr-2" role="group">
+                        <input type="button" class="btn botaoPadraoMedio" value="Cursos" onclick="location.href='@Url.Action("Index", "Cursos")'" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="btn-group mr-2" role="group">
+                        <input type="button" class="btn botaoPadraoMedio" value="Pessoas" onclick="location.href='@Url.Action("Index", "Pessoas")'" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

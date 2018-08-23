@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SistemaDeCursos.Models.Pessoas>
+
+@{
+    ViewBag.Title = "Pessoas";
+}
+
+<div class="div-botoes">
+    <input type="button" class="botaoPadraoMedio" value="Nova Pessoa" onclick="location.href='@Url.Action("Create", "Pessoas")'" />
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            <a href="@Url.Action("Index", "Pessoas", new { ordernarPor = "NomeDaPessoa", ultimaOrdenacao = ViewBag.UltimaOrdenacao })">@Html.DisplayNameFor(model => model.pessoa_nome)</a>
+        </th>
+        <th>
+            <a href="@Url.Action("Index", "Pessoas", new { ordernarPor = "DataDeNascimento", ultimaOrdenacao = ViewBag.UltimaOrdenacao })">@Html.DisplayNameFor(model => model.data_nascimento_exibicao)</a>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefone_fixo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefone_movel)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pessoa_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_nascimento_exibicao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sexo_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone_fixo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone_movel)
+            </td>
+            <td>
+                <input type="button" class="botaoPadraoMini" value="Editar" onclick="location.href='@Url.Action("Edit", "Pessoas", new { id = item.pessoa_id } )'" />
+                <input type="button" class="botaoPadraoMiniVermelho" value="Excluir" onclick="excluirPessoa(@item.pessoa_id)" />
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //
+        });
+
+        function excluirPessoa(id) {
+            excluirRegistro(id, '@Url.Action("ExcluirPessoa", "Pessoas")');
+        }
+    </script>
+}

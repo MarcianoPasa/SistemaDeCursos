@@ -1,0 +1,234 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+    max-width: 100%;
+}
+
+
+
+h4 {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    color: #008000;
+}
+
+.navbar-inverse {
+    background-color: #008000;
+}
+
+    .navbar-inverse:hover {
+        background-color: #00e600;
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+    }
+
+        .navbar-inverse .navbar-brand:hover {
+            color: #000000;
+        }
+
+        .navbar-inverse .navbar-brand:focus {
+            color: #fff;
+            background-color: #008000;
+        }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            color: #000000;
+        }
+
+    .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #fff;
+        background-color: #008000;
+    }
+
+#cabecalho-padrao {
+    background-color: #fff;
+    position: page;
+    width: 100%;
+    background: -webkit-linear-gradient(left, #fff, #008000); /* da esquerda à direita */
+    background: -o-linear-gradient(right, #fff, #008000); /* terminando à direita */
+    background: -moz-linear-gradient(right, #fff, #008000); /* terminando à direita */
+    background: linear-gradient(to right, #fff, #008000); /* indo para a direita */
+}
+
+    #cabecalho-padrao:hover {
+        color: #000000;
+        background: -webkit-linear-gradient(left, #fff, #00e600); /* da esquerda à direita */
+        background: -o-linear-gradient(right, #fff, #00e600); /* terminando à direita */
+        background: -moz-linear-gradient(right, #fff, #00e600); /* terminando à direita */
+        background: linear-gradient(to right, #fff, #00e600); /* indo para a direita */
+    }
+
+    #cabecalho-padrao a {
+        font-size: 30px;
+        color: #008000;
+        font-weight: bold;
+    }
+
+.div-botoes {
+    height: 53px;
+}
+
+.botaoPadrao {
+    position: absolute;
+    margin-top: 10px;
+    padding: 5px;
+    margin-right: 10px;
+    width: 125px;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    background-color: #008000;
+    border-color: #008000;
+    font-weight: bold;
+}
+
+    .botaoPadrao:hover {
+        color: #000000;
+        background-color: #00e600;
+        border-color: #00e600;
+    }
+
+.botaoPadraoVermelho {
+    position: absolute;
+    margin-top: 10px;
+    padding: 5px;
+    width: 125px;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    background-color: #b30000;
+    border-color: #b30000;
+    font-weight: bold;
+}
+
+    .botaoPadraoVermelho:hover {
+        color: #000000;
+        background-color: #ff0000;
+        border-color: #ff0000;
+    }
+
+
+.botaoPadraoMedio {
+    position: absolute;
+    margin-top: 10px;
+    padding: 5px;
+    width: 250px;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    background-color: #008000;
+    border-color: #008000;
+    font-weight: bold;
+}
+
+    .botaoPadraoMedio:hover {
+        color: #000000;
+        background-color: #00e600;
+        border-color: #00e600;
+    }
+
+
+.botaoPadraoMini {
+    width: 80px;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    background-color: #008000;
+    border-color: #008000;
+    font-weight: bold;
+    margin: 1px;
+}
+
+    .botaoPadraoMini:hover {
+        color: #000000;
+        background-color: #00e600;
+        border-color: #00e600;
+    }
+
+.botaoPadraoMiniVermelho {
+    width: 80px;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    background-color: #b30000;
+    border-color: #b30000;
+    font-weight: bold;
+    margin: 1px;
+}
+
+    .botaoPadraoMiniVermelho:hover {
+        color: #000000;
+        background-color: #ff0000;
+        border-color: #ff0000;
+    }
+
+.form-control-campos-pequenos {
+    display: block;
+    min-width: 18%;
+    max-width: 18%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-control-campos-texto {
+    display: block;
+    width: 100%;
+    height: 204px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}

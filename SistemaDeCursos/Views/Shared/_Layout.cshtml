@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/images/write-board.png" rel="shortcut icon" type="image/x-icon" />
+    <title>@ViewBag.Title - Sistema de Cursos</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                @Html.ActionLink("Sistema de Cursos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Acesso Rápido
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index", "Pessoas")">Pessoas</a></li>
+                        <li><a href="@Url.Action("Index", "Cursos")">Cursos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        @*
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        *@
+    </div>
+
+    <div class="modal fade" id="confirmarExclusao" role="dialog" hidden>
+        <div class="modal-dialog" role="document"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>Atenção!</p>
+                </div>
+
+                <div class="modal-body">
+                    <p>Deseja excluir este registro?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="excluirSim" type="button" data-dismiss="modal" class="btn btn-danger">Sim</button>
+                    <button id="excluirNao" type="button" data-dismiss="modal" class="btn btn-default">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mostrarMensagemDeAtencao" role="dialog" hidden>
+        <div class="modal-dialog" role="document"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>Atenção!</p>
+                </div>
+
+                <div class="modal-body">
+                    <p id="mensagemAtencao"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="atencaoOk" type="button" data-dismiss="modal" class="btn btn-default">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/inputmask")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script type="text/javascript">
+    function mostrarMensagemDeAtencao(mensagem) {
+        document.getElementById("mensagemAtencao").innerHTML = mensagem;
+        $("#mostrarMensagemDeAtencao").modal('show');
+    }
+
+    function excluirRegistro(id, url) {
+        if (id === undefined || id === "" || id === null) {
+            mostrarMensagemDeAtencao("Erro ao excluir o registro");
+            return;
+        }
+
+        $("#confirmarExclusao").modal('show');
+
+        $("#confirmarExclusao").on("click", "#excluirSim", function () {
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { id: id },
+                async: true,
+                success: function (result) {
+                    if (result === "") {
+                        window.location.reload();
+                    }
+                    else {
+                        mostrarMensagemDeAtencao(result);
+                    }
+                },
+                error: function (result) {
+                    mostrarMensagemDeAtencao(result);
+                }
+            });
+        });
+    }
+</script>

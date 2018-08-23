@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SistemaDeCursos.Models.Cursos>
+
+@{
+    ViewBag.Title = "Cursos";
+}
+
+<div class="div-botoes">
+    <input type="button" class="botaoPadraoMedio" value="Novo Curso" onclick="location.href='@Url.Action("Create", "Cursos")'" />
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            <a href="@Url.Action("Index", "Cursos", new { ordernarPor = "NomeDoCurso", ultimaOrdenacao = ViewBag.UltimaOrdenacao })">@Html.DisplayNameFor(model => model.curso_nome)</a>
+        </th>
+        <th>
+            <a href="@Url.Action("Index", "Cursos", new { ordernarPor = "DataDeInicio", ultimaOrdenacao = ViewBag.UltimaOrdenacao })">@Html.DisplayNameFor(model => model.data_inicio)</a>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hora_inicio)
+        </th>
+        <th>
+            <a href="@Url.Action("Index", "Cursos", new { ordernarPor = "DataDeTermino", ultimaOrdenacao = ViewBag.UltimaOrdenacao })">@Html.DisplayNameFor(model => model.data_termino)</a>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hora_termino)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.curso_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_inicio_exibicao)
+            </td>
+            <td>
+                <span class="HoraDeInicio">
+                    @Html.DisplayFor(modelItem => item.hora_inicio)
+                </span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_termino_exibicao)
+            </td>
+            <td>
+                <span class="HoraDeTermino">
+                    @Html.DisplayFor(modelItem => item.hora_termino)
+                </span>
+            </td>
+            <td>
+                <input type="button" class="botaoPadraoMini" value="Editar" onclick="location.href='@Url.Action("Edit", "Cursos", new { id = item.curso_id } )'" />
+                <input type="button" class="botaoPadraoMini" value="Inscritos" onclick="location.href='@Url.Action("Index", "Inscritos", new { cursoID = item.curso_id, cursoNome = item.curso_nome } )'" />
+                <input type="button" class="botaoPadraoMiniVermelho" value="Excluir" onclick="excluirCurso(@item.curso_id)" />
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //
+        });
+
+        function excluirCurso(id) {
+            excluirRegistro(id, '@Url.Action("ExcluirCurso", "Cursos")');
+        }
+    </script>
+}
+
