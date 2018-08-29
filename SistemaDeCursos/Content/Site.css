@@ -232,3 +232,21 @@ h4 {
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li > a {
+    margin-top: 10px;
+    color: #fff;
+    background-color: #008000;
+}
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li > a:hover {
+        margin-top: 10px;
+        color: #000000;
+        background-color: #00e600;
+    }
+
+        .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+            margin-top: 10px;
+            color: #000000;
+            background-color: #00e600;
+        }

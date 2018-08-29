@@ -1,0 +1,122 @@
+﻿@model IEnumerable<SistemaDeCursos.Models.Inscritos>
+
+<div id="partialViewInscritosNoCurso">
+    <div class="form-group">
+        <h4>@ViewBag.NomeDoCurso</h4>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right: 10px;"><b>Inserir nova pessoa ao curso:</b></label>
+        <input class="form-control" id="buscarNovaPessoa" />
+        <div class="div-botoes">
+            <input type="button" class="botaoPadrao" value="Inserir Pessoa" onclick="inserirInscritoEmCurso()" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h4>Lista de inscritos</h4>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th style="width: 90%">
+                Nome da pessoa
+            </th>
+            <th style="width: 10%"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 90%">
+                    @Html.DisplayFor(modelItem => item.pessoa_nome)
+                </td>
+                <td style="width: 10%">
+                    <input type="button" class="botaoPadraoMiniVermelho" value="Remover" onclick="removerInscrito(@item.inscricao_id)" />
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#buscarNovaPessoa").focus();
+
+        $("#buscarNovaPessoa").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("BuscaPessoaPorAutocompletar", "Pessoas")',
+                    dataType: "json",
+                    data: { buscarPor: $("#buscarNovaPessoa").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.label, value: item.label, id: item.id };
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        //mostrarMensagemDeAtencao(error);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $('#buscarNovaPessoa').attr('data-id', ui.item.id);
+            }
+        });
+
+        $("#buscarNovaPessoa").keypress(function (e) {
+            if (e.keyCode === 13) {
+                inserirInscritoEmCurso();
+                return false;
+            }
+        });
+    });
+
+    function inserirInscritoEmCurso() {
+        var pessoaID = $("#buscarNovaPessoa").attr("data-id");
+
+        if (pessoaID === "" || pessoaID === null || pessoaID === undefined) {
+            return;
+        }
+
+        var parametros = {
+            cursoID: '@ViewBag.CursoID',
+            pessoaID: $("#buscarNovaPessoa").attr("data-id")
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("InserirInscritoEmCurso", "Inscritos")',
+            data: parametros,
+            async: true,
+            success: function (result) {
+                if (result.status !== true) {                    
+                    mostrarMensagemDeAtencao(result.mensagem);
+                }
+
+                atualizarInscritosNoCurso();
+            },
+            error: function (result) {
+                atualizarInscritosNoCurso();
+                //mostrarMensagemDeAtencao(result);
+            }
+        });
+    }
+
+    function removerInscrito(id) {
+        excluirRegistro(
+            id,
+            '@Url.Action("RemoverInscritoEmCurso", "Inscritos")',
+            true,
+            "#partialViewInscritosNoCurso",
+            '@Url.Action("PartialViewInscritosNoCurso", "Cursos", new { id = ViewBag.CursoID, cursoNome = ViewBag.NomeDoCurso })'
+        );
+    }
+
+    function atualizarInscritosNoCurso() {
+        $("#partialViewInscritosNoCurso").load('@Url.Action("PartialViewInscritosNoCurso", "Cursos", new { id = ViewBag.CursoID, cursoNome = ViewBag.NomeDoCurso })');
+    }
+</script>
+

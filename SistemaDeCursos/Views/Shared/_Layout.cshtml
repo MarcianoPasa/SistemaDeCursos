@@ -8,6 +8,11 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+    @Scripts.Render("~/Scripts/jquery-3.3.1.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -95,8 +100,9 @@
         $("#mostrarMensagemDeAtencao").modal('show');
     }
 
-    function excluirRegistro(id, url) {
-        if (id === undefined || id === "" || id === null) {
+    function excluirRegistro(idRegistro, urlFuncaoExclusao, recarregarPartialView, nomeDaDiv, urlFuncaoRecarregar) {
+
+        if (idRegistro === undefined || idRegistro === "" || idRegistro === null) {
             mostrarMensagemDeAtencao("Erro ao excluir o registro");
             return;
         }
@@ -106,12 +112,17 @@
         $("#confirmarExclusao").on("click", "#excluirSim", function () {
             $.ajax({
                 type: "POST",
-                url: url,
-                data: { id: id },
+                url: urlFuncaoExclusao,
+                data: { id: idRegistro },
                 async: true,
                 success: function (result) {
                     if (result === "") {
-                        window.location.reload();
+                        if (recarregarPartialView) {
+                            $(nomeDaDiv).load(urlFuncaoRecarregar);
+                        }
+                        else {
+                            window.location.reload();
+                        }
                     }
                     else {
                         mostrarMensagemDeAtencao(result);

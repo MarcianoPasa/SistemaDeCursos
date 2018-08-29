@@ -7,76 +7,87 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <h4>Editando Curso</h4>
-            </div>
-        </div>
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.curso_id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.curso_nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.curso_nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.curso_nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.data_inicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.data_inicio, new { htmlAttributes = new { @class = "form-control-campos-pequenos" } })
-                @Html.ValidationMessageFor(model => model.data_inicio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.hora_inicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.hora_inicio, new { htmlAttributes = new { @class = "form-control-campos-pequenos", type = "time", min = "00:00:00", max = "23:59:59" } })
-                @Html.ValidationMessageFor(model => model.hora_inicio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.data_termino, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.data_termino, new { htmlAttributes = new { @class = "form-control-campos-pequenos" } })
-                @Html.ValidationMessageFor(model => model.data_termino, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.hora_termino, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.hora_termino, new { htmlAttributes = new { @class = "form-control-campos-pequenos", type = "time", min = "00:00:00", max = "23:59:59" } })
-                @Html.ValidationMessageFor(model => model.hora_termino, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control-campos-texto" } })
-                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group mr-2" role="group">
-                        <input type="submit" value="Salvar" class="btn botaoPadrao" />
+    <div id="tabs">
+        <ul class="nav nav-pills nav-justified" id="tabsCursoInscritos">
+            <li class="active"><a data-toggle="tab" id="tabCurso" href="#curso">Curso</a></li>
+            <li><a data-toggle="tab" id="tabInscritos" href="#inscritos">Inscritos</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="curso" class="tab-pane fade in active">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <h4>Editando Curso</h4>
+                        </div>
                     </div>
-                    <div class="btn-group mr-2" role="group">
-                        <input type="button" value="Cancelar" class="btn botaoPadraoVermelho" onclick="location.href='@Url.Action("Index", "Cursos")'" />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.curso_id)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.curso_nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.curso_nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.curso_nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.data_inicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.data_inicio, new { htmlAttributes = new { @class = "form-control-campos-pequenos" } })
+                            @Html.ValidationMessageFor(model => model.data_inicio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.hora_inicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.hora_inicio, new { htmlAttributes = new { @class = "form-control-campos-pequenos", type = "time", min = "00:00:00", max = "23:59:59" } })
+                            @Html.ValidationMessageFor(model => model.hora_inicio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.data_termino, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.data_termino, new { htmlAttributes = new { @class = "form-control-campos-pequenos" } })
+                            @Html.ValidationMessageFor(model => model.data_termino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.hora_termino, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.hora_termino, new { htmlAttributes = new { @class = "form-control-campos-pequenos", type = "time", min = "00:00:00", max = "23:59:59" } })
+                            @Html.ValidationMessageFor(model => model.hora_termino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control-campos-texto" } })
+                            @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group mr-2" role="group">
+                                    <input type="submit" value="Salvar" class="btn botaoPadrao" />
+                                </div>
+                                <div class="btn-group mr-2" role="group">
+                                    <input type="button" value="Cancelar" class="btn botaoPadraoVermelho" onclick="location.href='@Url.Action("Index", "Cursos")'" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div id="inscritos" class="tab-pane fade"></div>
         </div>
     </div>
 }
@@ -84,13 +95,23 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/Scripts/jquery-3.3.1.js")
-    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
-
     <script type="text/javascript">
         $(document).ready(function () {
             $("input[type=text]").first().focus();
-        });
+
+            $("#tabCurso").click(function () {
+                setTimeout(function () {
+                    $("input[type=text]").first().focus();
+                }, 400);
+            });
+
+            $("#tabInscritos").click(function () {
+                setTimeout(function () {
+                    $("#buscarNovaPessoa").focus();
+                }, 400);
+            });
+
+            $("#inscritos").load('@Url.Action("PartialViewInscritosNoCurso", "Cursos", new { id = Model.curso_id, cursoNome = Model.curso_nome })');
+        });        
     </script>
 }

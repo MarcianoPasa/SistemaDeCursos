@@ -11,7 +11,6 @@ namespace SistemaDeCursos.Controllers
     public class CursosController : Controller
     {
         private CursosContext db = new CursosContext();
-        private readonly InscritosContext dbInscritos = new InscritosContext();
 
         public ActionResult Index(string ordernarPor, string ultimaOrdenacao)
         {
@@ -96,7 +95,7 @@ namespace SistemaDeCursos.Controllers
             }
             return View(cursos);
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "curso_id,curso_nome,data_inicio,hora_inicio,data_termino,hora_termino,descricao")] Cursos cursos)
@@ -133,6 +132,15 @@ namespace SistemaDeCursos.Controllers
             }
 
             return string.Empty;
+        }
+
+        public ActionResult PartialViewInscritosNoCurso(int? id, string cursoNome)
+        {
+            InscritosDB inscritosDB = new InscritosDB();
+            ViewBag.CursoID = id;
+            ViewBag.NomeDoCurso = cursoNome;
+
+            return PartialView("~/Views/Inscritos/_PartialViewInscritosNoCurso.cshtml", inscritosDB.BuscarInscritosPeloCursoID(id).OrderBy(x => x.pessoa_nome).ToList());
         }
     }
 }
