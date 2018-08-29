@@ -96,7 +96,7 @@ h4 {
         font-weight: bold;
     }
 
-.div-botoes {
+.div-botoes, .div-botoes-abas {
     height: 53px;
 }
 
@@ -196,8 +196,8 @@ h4 {
 
 .form-control-campos-pequenos {
     display: block;
-    min-width: 18%;
-    max-width: 18%;
+    min-width: 150px;
+    max-width: 150px;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -250,3 +250,55 @@ h4 {
             color: #000000;
             background-color: #00e600;
         }
+
+
+
+/* Para Mobile */
+/*@media screen and (max-width: 540px) {
+    .view {
+        width: 400px;
+    }
+}*/
+
+/* Para Tablets */
+/*@media screen and (min-width: 540px) and (max-width: 780px) {
+    .view {
+        width: 600px;
+    }
+}*/
+
+/* Para Mobile e Tablets */
+@media screen and (max-width: 780px) {
+    .view {
+        width: 400px;
+    }
+
+    .navbar-header {
+        height: 35px;
+    }
+
+    .form-group-botoes, .form-group-titulos {
+        text-align: center;
+        margin-top: 45px;
+    }
+
+    .form-group-titulos-abas {
+        text-align: center;
+    }
+
+    .div-botoes {
+        margin-top: 45px;
+    }
+
+    .ul-abas {
+        display: inline-flex;
+        width: 100%;
+        margin-top: 45px;
+    }
+
+    .li-abas {
+        display: inline-flex;
+        width: 100%;
+    }
+}
+
